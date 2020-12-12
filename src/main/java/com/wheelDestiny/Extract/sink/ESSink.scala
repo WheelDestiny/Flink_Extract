@@ -2,7 +2,7 @@ package com.wheelDestiny.Extract.sink
 
 import java.net.{InetAddress, InetSocketAddress}
 
-import com.wheelDestiny.Extract.util.Record
+import com.wheelDestiny.Extract.util.{Record, Util}
 import org.apache.flink.api.common.functions.RuntimeContext
 import org.apache.flink.streaming.connectors.elasticsearch.{ElasticsearchSinkFunction, RequestIndexer}
 import org.apache.flink.streaming.connectors.elasticsearch5.ElasticsearchSink
@@ -39,7 +39,7 @@ object ESSink{
         map.put("url_md5", element.urlMd5)
         map.put("host", element.host)
         map.put("domain", element.domain)
-        map.put("date", element.eventTime.toString)
+        map.put("date", Util.getTime(element.eventTime, "yyyy-MM-dd HH:mm:ss"))
         map.put("content", element.content)
 
         //
